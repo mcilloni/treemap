@@ -22,11 +22,11 @@ void* map_get(Map *map, void *key);
 void map_put(Map *map, void *key, void *value, uint8_t freewhat);
 bool map_contains(Map *map, void *key);
 bool map_remove(Map *map, void *key);
-void map_free(Map *map, bool free_entries);
+void map_free(Map *map);
 
 StringMap* strmap_new(void);
-void* strmap_get(StringMap *map, const char *key);
-void strmap_put(StringMap *map, const char *key, void *value, uint8_t freewhat);
+extern void* (*strmap_get) (StringMap *map, const char *key);
+extern void (*strmap_put)(StringMap *map, const char *key, void *value, uint8_t freewhat);
 
 MapIter* mapiter_start(Map *map);
 Pair* mapiter_next(MapIter *iter);

@@ -7,10 +7,10 @@ int main(void) {
 
   StringMap* map = strmap_new();
 
-  map_put(map, "potato", "battery", FREE_NONE);
-  map_put(map, "honey", "poney", FREE_NONE);
-  map_put(map, "fagiots", "david faggetta", FREE_NONE);
-  map_put(map, "u fagiots", "lelzie", FREE_NONE);
+  strmap_put(map, "potato", "battery", FREE_NONE);
+  strmap_put(map, "honey", "poney", FREE_NONE);
+  strmap_put(map, "fagiots", "david faggetta", FREE_NONE);
+  strmap_put(map, "u fagiots", "lelzie", FREE_NONE);
 
   MapIter *iter = mapiter_start(map);
   Pair *pair;
@@ -36,7 +36,7 @@ int main(void) {
   puts(" }");
 
   mapiter_free(iter);
-  map_free(map, false);
+  map_free(map);
 
   return 0;
 

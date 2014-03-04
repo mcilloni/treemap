@@ -40,7 +40,7 @@ bool map_remove(Map *map, void *key) {
 	return ret;
 }
 
-void map_free(Map *map, bool free_entries) {
+void map_free(Map *map) {
   node_free(map->root);
   free(map);
 }
@@ -54,3 +54,6 @@ int8_t strcomparer(void* s1, void* s2) {
 StringMap* strmap_new(void) {
   return map_new(strcomparer);
 }
+
+void* (*strmap_get) (StringMap *map, const char *key) = (void* (*) (StringMap*, const char*)) map_get;
+void  (*strmap_put) (StringMap *map, const char *key, void *value, uint8_t freewhat) = (void (*) (StringMap*, const char*, void*, uint8_t)) map_put;

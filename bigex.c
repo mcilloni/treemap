@@ -45,7 +45,7 @@ int main(void) {
   puts(" }");
 
   mapiter_free(iter);
-  map_free(map, false);
+  map_free(map);
 
   return 0;
 

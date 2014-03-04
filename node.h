@@ -39,7 +39,7 @@ void node_free(Node *node);
 Node* node_fixUp(Node *node);
 Node* node_moveRedLeft(Node *node);
 Node* node_moveRedRight(Node *node);
-void* node_get(Node *node, void *keyV);
+bool node_get(Node *node, void *keyV, void **valueV);
 Pair* node_mkpair(Node *node);
 Node* node_deleteMin(Node *node); 
 void* node_min(Node *node);

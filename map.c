@@ -10,12 +10,12 @@ Map* map_new(comparer cmp) {
   return map;
 }
 
-void* map_get(Map *map, void *key) {
+bool map_get(Map *map, void *key, void **value) {
   if (!map->root) {
-    return NULL;
+    return false;
   }
 
-  return node_get(map->root,key);
+  return node_get(map->root,key, value);
 }
 
 void map_put(Map *map, void *key, void *value, uint8_t freewhat) {
@@ -25,7 +25,8 @@ void map_put(Map *map, void *key, void *value, uint8_t freewhat) {
 }
 
 bool map_contains(Map *map, void *key) {
-  return (bool) map_get(map, key);
+  void *value;
+  return (bool) map_get(map, key, &value);
 }
 
 bool map_remove(Map *map, void *key) {

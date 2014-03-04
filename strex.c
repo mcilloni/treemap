@@ -9,8 +9,14 @@ int main(void) {
 
   strmap_put(map, "potato", "battery", FREE_NONE);
   strmap_put(map, "honey", "poney", FREE_NONE);
-  strmap_put(map, "fagiots", "david faggetta", FREE_NONE);
-  strmap_put(map, "u fagiots", "lelzie", FREE_NONE);
+  strmap_put(map, "flare", "guaxxa", FREE_NONE);
+  strmap_put(map, "guagua", "lelzie", FREE_NONE);
+
+  void *val;
+
+  if (map_get(map, "flare", &val)) {
+    puts(val);
+  }
 
   MapIter *iter = mapiter_start(map);
   Pair *pair;

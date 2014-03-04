@@ -18,7 +18,7 @@ typedef struct {
 } MapIter;
 
 Map* map_new(comparer cmp);
-void* map_get(Map *map, void *key);
+bool map_get(Map *map, void *key, void **value);
 void map_put(Map *map, void *key, void *value, uint8_t freewhat);
 bool map_contains(Map *map, void *key);
 bool map_remove(Map *map, void *key);

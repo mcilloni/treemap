@@ -132,21 +132,23 @@ Node* node_moveRedRight(Node *node) {
 
 }
 
-void* node_get(Node *node, void *keyV) {
+bool node_get(Node *node, void *keyV, void **valueV) {
 
   if(!node) {
-    return NULL;
+    return false;
   }
 
   switch (node->cmp(keyV, node->key)) {
-  case 0:
-    return node->value;
-  case -1:
-	return node_get(node->left, keyV);
-  default:
-	return node_get(node->right,keyV);
+  case 0: {
+    *valueV = node->value;
+    return true;
   }
-  return NULL;
+  case -1:
+	return node_get(node->left, keyV, valueV);
+  default:
+	return node_get(node->right, keyV, valueV);
+  }
+  return false;
 }
 
 Node* node_deleteMin(Node *node) { 
@@ -212,7 +214,7 @@ Node* node_delete(Node *node, void *keyV, bool *found) {
     }
 
     if (node->cmp(keyV, node->key)) {
-      node->value = node_get(node->right, node_min(node->right));
+      node_get(node->right, node_min(node->right), &(node->value));
       node->key = node_min(node->right);
       node->right = node_deleteMin(node->right);
       *found = true;

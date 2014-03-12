@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int8_t cmp(void *v1, void *v2) {
+int8_t cmp(const void *v1, const void *v2) {
 
   intptr_t cmv = (intptr_t) v1 - (intptr_t) v2;
 

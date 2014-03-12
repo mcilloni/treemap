@@ -1,7 +1,7 @@
 #include "node.h"
 #include <jemalloc/jemalloc.h>
 
-Node* node_new(void *key, void *val, comparer cmp, uint8_t freewhat) {
+Node* node_new(const void *key, void *val, comparer cmp, uint8_t freewhat) {
   Node *ret = calloc(1, sizeof(Node));
   ret->key = key;
   ret->value = val;
@@ -11,23 +11,25 @@ Node* node_new(void *key, void *val, comparer cmp, uint8_t freewhat) {
   return ret;
 }
 
-Node* node_add(Node* node, void *keyV, void *value, comparer cmp, uint8_t freewhat) {
+Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, bool *newkey) {
 
   if (!node) {
+    *newkey = true;
     return node_new(keyV, value, cmp, freewhat);
   }
 
   switch(node->cmp(keyV,node->key)) {
   case 1:
-    node->right = node_add(node->right, keyV, value, node->cmp, freewhat);
+    node->right = node_add(node->right, keyV, value, node->cmp, freewhat, newkey);
 	break;
 
   case -1:
-	node->left = node_add(node->left, keyV, value, node->cmp, freewhat);
+	node->left = node_add(node->left, keyV, value, node->cmp, freewhat, newkey);
 	break;
 
   default:
 	node->value = value;
+  *newkey = false;
 	break;		
   }
 
@@ -78,7 +80,7 @@ void node_free(Node *node) {
 
   if (node->freewhat & FREE_KEY) {
     if(node->key) {
-      free(node->key);
+      free((void*) node->key);
     }
   }
 
@@ -132,7 +134,7 @@ Node* node_moveRedRight(Node *node) {
 
 }
 
-bool node_get(Node *node, void *keyV, void **valueV) {
+bool node_get(Node *node, const void *keyV, void **valueV) {
 
   if(!node) {
     return false;
@@ -185,13 +187,13 @@ Pair* node_minpair(Node *node) {
 
 void* node_min(Node *node) {
   if(!node->left) {
-    return node->key;
+    return (void*) node->key;
   } else {
     return node_min(node->left);
   }
 }
 
-Node* node_delete(Node *node, void *keyV, bool *found) { 
+Node* node_delete(Node *node, const void *keyV, bool *found) { 
 
   if (node->cmp(keyV,node->key)) {
     if (node_isRed(node->left) && node_isRed(node->left->left)) {

@@ -13,20 +13,18 @@ typedef Map StringMap;
 
 typedef struct {
   Map *map;
-  void *lastKey;
+  const void *lastKey;
   bool begin;
 } MapIter;
 
 Map* map_new(comparer cmp);
-bool map_get(Map *map, void *key, void **value);
-void map_put(Map *map, void *key, void *value, uint8_t freewhat);
-bool map_contains(Map *map, void *key);
-bool map_remove(Map *map, void *key);
+bool map_get(Map *map, const void *key, void **value);
+void map_put(Map *map, const void *key, void *value, uint8_t freewhat);
+bool map_contains(Map *map, const void *key);
+bool map_remove(Map *map, const void *key);
 void map_free(Map *map);
 
 StringMap* strmap_new(void);
-extern void* (*strmap_get) (StringMap *map, const char *key);
-extern void (*strmap_put)(StringMap *map, const char *key, void *value, uint8_t freewhat);
 
 MapIter* mapiter_start(Map *map);
 Pair* mapiter_next(MapIter *iter);

@@ -7,10 +7,10 @@ int main(void) {
 
   StringMap* map = strmap_new();
 
-  strmap_put(map, "potato", "battery", FREE_NONE);
-  strmap_put(map, "honey", "poney", FREE_NONE);
-  strmap_put(map, "flare", "guaxxa", FREE_NONE);
-  strmap_put(map, "guagua", "lelzie", FREE_NONE);
+  map_put(map, "potato", "battery", FREE_NONE);
+  map_put(map, "honey", "poney", FREE_NONE);
+  map_put(map, "flare", "guaxxa", FREE_NONE);
+  map_put(map, "guagua", "lelzie", FREE_NONE);
 
   void *val;
 

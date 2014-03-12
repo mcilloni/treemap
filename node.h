@@ -6,10 +6,10 @@
 
 static const bool BLACK = false, RED = true;
 
-typedef int8_t (*comparer)(void*,void*);
+typedef int8_t (*comparer)(const void*,const void*);
 
 typedef struct {
-  void *key;
+  const void *key;
   void *value;
 } Pair;
 
@@ -21,15 +21,15 @@ enum freemap {
 
 typedef struct node_s {
   struct node_s *left, *right;
-  void *key;
+  const void *key;
   void *value;
   bool color; //RED = true, black = false
   uint8_t freewhat;
   comparer cmp;
 } Node;
 
-Node* node_new(void *key, void *val, int8_t (*cmp)(void*,void*), uint8_t freewhat);
-Node* node_add(Node* node, void *keyV, void *value, comparer cmp, uint8_t freewhat);
+Node* node_new(const void *key, void *val, comparer cmp, uint8_t freewhat);
+Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, bool *newkey);
 Node* node_rotateLeft(Node *node);
 Node* node_rotateRight(Node *node);
 void node_colorFlip(Node *node);
@@ -39,12 +39,12 @@ void node_free(Node *node);
 Node* node_fixUp(Node *node);
 Node* node_moveRedLeft(Node *node);
 Node* node_moveRedRight(Node *node);
-bool node_get(Node *node, void *keyV, void **valueV);
+bool node_get(Node *node, const void *keyV, void **valueV);
 Pair* node_mkpair(Node *node);
 Node* node_deleteMin(Node *node); 
 void* node_min(Node *node);
 Pair* node_minpair(Node *node);
-Node* node_delete(Node *node, void *keyV, bool *found); 
+Node* node_delete(Node *node, const void *keyV, bool *found); 
 
 void pair_free(Pair *pair);
 

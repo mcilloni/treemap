@@ -10,7 +10,7 @@ MapIter* mapiter_start(Map *map) {
   return iter;
 }
 
-Pair* next(Node *node, void *lastKey) {
+Pair* next(Node *node, const void *lastKey) {
 
   if (!node) {
     return NULL;

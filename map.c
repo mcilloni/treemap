@@ -10,7 +10,7 @@ Map* map_new(comparer cmp) {
   return map;
 }
 
-bool map_get(Map *map, void *key, void **value) {
+bool map_get(Map *map, const void *key, void **value) {
   if (!map->root) {
     return false;
   }
@@ -18,18 +18,19 @@ bool map_get(Map *map, void *key, void **value) {
   return node_get(map->root,key, value);
 }
 
-void map_put(Map *map, void *key, void *value, uint8_t freewhat) {
-  map->root = node_add(map->root, key, value, map->cmp, freewhat);
+void map_put(Map *map, const void *key, void *value, uint8_t freewhat) {
+  bool newkey = true;
+  map->root = node_add(map->root, key, value, map->cmp, freewhat, &newkey);
   map->root->color = BLACK;
-  ++(map->size);
+  map->size += newkey;
 }
 
-bool map_contains(Map *map, void *key) {
+bool map_contains(Map *map, const void *key) {
   void *value;
   return (bool) map_get(map, key, &value);
 }
 
-bool map_remove(Map *map, void *key) {
+bool map_remove(Map *map, const void *key) {
 	bool ret = false;
 	map->root = node_delete(map->root, key, &ret);
 	map->root->color = BLACK;
@@ -46,7 +47,7 @@ void map_free(Map *map) {
   free(map);
 }
 
-int8_t strcomparer(void* s1, void* s2) {
+int8_t strcomparer(const void* s1, const void* s2) {
   int comp = strcmp(s1, s2);
 
   return (int8_t) (comp > 0) - (comp < 0);
@@ -56,5 +57,3 @@ StringMap* strmap_new(void) {
   return map_new(strcomparer);
 }
 
-void* (*strmap_get) (StringMap *map, const char *key) = (void* (*) (StringMap*, const char*)) map_get;
-void  (*strmap_put) (StringMap *map, const char *key, void *value, uint8_t freewhat) = (void (*) (StringMap*, const char*, void*, uint8_t)) map_put;

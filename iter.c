@@ -1,6 +1,6 @@
 #include "map.h"
 
-#include <jemalloc/jemalloc.h>
+#include <stdlib.h>
 
 MapIter* mapiter_start(Map *map) {
   MapIter *iter = malloc(sizeof(MapIter));

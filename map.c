@@ -1,8 +1,7 @@
 #include "map.h"
 
+#include <stdlib.h>
 #include <string.h>
-
-#include <jemalloc/jemalloc.h>
 
 Map* map_new(comparer cmp) {
   Map *map = calloc(1, sizeof(Map));

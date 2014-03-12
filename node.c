@@ -1,5 +1,6 @@
 #include "node.h"
-#include <jemalloc/jemalloc.h>
+
+#include <stdlib.h>
 
 Node* node_new(const void *key, void *val, comparer cmp, uint8_t freewhat) {
   Node *ret = calloc(1, sizeof(Node));

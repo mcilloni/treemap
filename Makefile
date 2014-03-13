@@ -13,7 +13,6 @@ all: clean
 	$(CC) -o bigex bigex.c -L. -std=c11 -ltreemap -g -Wall -pedantic	
 	$(CC) -o strex strex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 
 	$(CC) -o ovex ovex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 
-	$(CC) -o libtreemap.so node.o map.o iter.o -shared 
 	rm *.o
 
 clean:

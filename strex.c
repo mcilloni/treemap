@@ -34,7 +34,7 @@ int main(void) {
     } else {
       inside = true;
     }
-    printf("%s : %s", pair->key, pair->value);
+    printf("%s : %s", (char*) pair->key, (char*) pair->value);
 
     pair_free(pair);
   }

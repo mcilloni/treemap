@@ -26,7 +26,7 @@ int main(void) {
 
   bool inside = false;
 
-  printf("Size: %lu\n", map->size);
+  printf("Size: %zu\n", map->size);
 
   fputs("{ ", stdout);
 
@@ -37,7 +37,7 @@ int main(void) {
     } else {
       inside = true;
     }
-    printf("%lu : %lu", (size_t) pair->key, (size_t) pair->value);
+    printf("%zu : %zu", (size_t) pair->key, (size_t) pair->value);
 
     pair_free(pair);
   }

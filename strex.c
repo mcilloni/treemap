@@ -23,7 +23,7 @@ int main(void) {
 
   bool inside = false;
 
-  printf("Size: %lu\n", map->size);
+  printf("Size: %zu\n", map->size);
 
   fputs("{ ", stdout);
 

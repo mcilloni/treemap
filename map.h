@@ -3,9 +3,11 @@
 
 #include "node.h"
 
+#include <stddef.h>
+
 typedef struct {
   Node *root;
-  uint64_t size;
+  size_t size;
   comparer cmp;
 } Map;
 

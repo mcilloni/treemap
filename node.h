@@ -35,7 +35,7 @@ Node* node_rotateRight(Node *node);
 void node_colorFlip(Node *node);
 bool node_isRed(Node *node);
 bool node_isBlack(Node *node);
-void node_free(Node *node);
+void node_free(Node *node, void (*freeKey)(void*), void (*freeVal)(void*));
 Node* node_fixUp(Node *node);
 Node* node_moveRedLeft(Node *node);
 Node* node_moveRedRight(Node *node);

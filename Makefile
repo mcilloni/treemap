@@ -3,7 +3,10 @@ ifndef CC
 endif
 
 AR=ar
-RANLIB=ranlib
+
+ifndef RANLIB
+	RANLIB=ranlib
+endif
 
 all: clean
 	$(CC) -c map.c node.c iter.c -std=c11 -g -Wall -pedantic -fPIC

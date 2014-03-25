@@ -70,24 +70,24 @@ bool node_isBlack(Node *node) {
   return !node || !(node->color);
 }
 
-void node_free(Node *node) {
+void node_free(Node *node, void (*freeKey)(void*), void (*freeVal)(void*)) {
 
   if(!node) {
     return;
   }
 
-  node_free(node->left);
-  node_free(node->right);
+  node_free(node->left, freeKey, freeVal);
+  node_free(node->right, freeKey, freeVal);
 
   if (node->freewhat & FREE_KEY) {
     if(node->key) {
-      free((void*) node->key);
+      freeKey((void*) node->key);
     }
   }
 
   if (node->freewhat & FREE_VALUE) {
     if(node->value) {
-      free(node->value);
+      freeVal(node->value);
     }
   }
 

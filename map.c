@@ -41,9 +41,25 @@ bool map_remove(Map *map, const void *key) {
 	return ret;
 }
 
-void map_free(Map *map) {
-  node_free(map->root);
+void map_freeSpec(Map *map, void (*freeKey)(void*), void (*freeVal)(void*)) {
+  if (!map) {
+    return;
+  }
+
+  if (!freeKey) {
+    freeKey = free;
+  }
+
+  if (!freeVal) {
+    freeVal = free;
+  }
+
+  node_free(map->root, freeKey, freeVal);
   free(map);
+}
+
+void map_free(Map *map) {
+  map_freeSpec(map, NULL, NULL);
 }
 
 int8_t strcomparer(const void* s1, const void* s2) {

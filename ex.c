@@ -1,4 +1,6 @@
 #include "map.h"
+
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -40,7 +42,7 @@ int main(void) {
     } else {
       inside = true;
     }
-    printf("%lu : %lu", (uintptr_t) pair->key, (uintptr_t) pair->value);
+    printf("%" PRIuPTR " : %" PRIuPTR, (uintptr_t) pair->key, (uintptr_t) pair->value);
 
     pair_free(pair);
   }

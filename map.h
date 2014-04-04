@@ -21,7 +21,7 @@ typedef struct {
 
 Map* map_new(comparer cmp);
 bool map_get(Map *map, const void *key, void **value);
-void map_put(Map *map, const void *key, void *value, uint8_t freewhat);
+void* map_put(Map *map, const void *key, void *value, uint8_t freewhat);
 bool map_contains(Map *map, const void *key);
 bool map_remove(Map *map, const void *key);
 void map_freeSpec(Map *map, void (*freeKey)(void*), void (*freeVal)(void*));

@@ -12,25 +12,25 @@ Node* node_new(const void *key, void *val, comparer cmp, uint8_t freewhat) {
   return ret;
 }
 
-Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, bool *newkey) {
+Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, void **oldvalue) {
 
   if (!node) {
-    *newkey = true;
+    *oldvalue = NULL;
     return node_new(keyV, value, cmp, freewhat);
   }
 
   switch(node->cmp(keyV,node->key)) {
   case 1:
-    node->right = node_add(node->right, keyV, value, node->cmp, freewhat, newkey);
+    node->right = node_add(node->right, keyV, value, node->cmp, freewhat, oldvalue);
 	break;
 
   case -1:
-	node->left = node_add(node->left, keyV, value, node->cmp, freewhat, newkey);
+	node->left = node_add(node->left, keyV, value, node->cmp, freewhat, oldvalue);
 	break;
 
   default:
+  *oldvalue = node->value;
 	node->value = value;
-  *newkey = false;
 	break;		
   }
 

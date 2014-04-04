@@ -29,7 +29,7 @@ typedef struct node_s {
 } Node;
 
 Node* node_new(const void *key, void *val, comparer cmp, uint8_t freewhat);
-Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, bool *newkey);
+Node* node_add(Node* node, const void *keyV, void *value, comparer cmp, uint8_t freewhat, void **oldvalue);
 Node* node_rotateLeft(Node *node);
 Node* node_rotateRight(Node *node);
 void node_colorFlip(Node *node);

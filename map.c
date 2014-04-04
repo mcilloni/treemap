@@ -17,11 +17,12 @@ bool map_get(Map *map, const void *key, void **value) {
   return node_get(map->root,key, value);
 }
 
-void map_put(Map *map, const void *key, void *value, uint8_t freewhat) {
-  bool newkey = true;
-  map->root = node_add(map->root, key, value, map->cmp, freewhat, &newkey);
+void* map_put(Map *map, const void *key, void *value, uint8_t freewhat) {
+  void* oldvalue;
+  map->root = node_add(map->root, key, value, map->cmp, freewhat, &oldvalue);
   map->root->color = BLACK;
-  map->size += newkey;
+  map->size += (oldvalue == NULL);
+  return oldvalue;
 }
 
 bool map_contains(Map *map, const void *key) {

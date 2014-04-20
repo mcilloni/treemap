@@ -2,7 +2,9 @@ ifndef CC
 	CC=clang
 endif
 
-AR=ar
+ifndef AR
+	AR=ar 
+endif
 
 ifndef RANLIB
 	RANLIB=ranlib
@@ -10,7 +12,7 @@ endif
 
 all: clean
 	$(CC) -c map.c node.c iter.c -std=c11 -g -Wall -pedantic -fPIC
-	$(AR) -rc libtreemap.a map.o node.o iter.o
+	$(AR) rc libtreemap.a map.o node.o iter.o
 	$(RANLIB) libtreemap.a
 	$(CC) -o ex ex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 	
 	$(CC) -o bigex bigex.c -L. -std=c11 -ltreemap -g -Wall -pedantic	

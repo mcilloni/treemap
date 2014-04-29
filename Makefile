@@ -27,14 +27,13 @@ SRCS = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.o,$(SRCS))
 
 all: $(OBJS)
-	$(CC) -c map.c node.c iter.c -std=c11 -g -Wall -pedantic -fPIC
 	$(AR) rc libtreemap.a map.o node.o iter.o
 	$(RANLIB) libtreemap.a
-	$(CC) -o ex ex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 	
-	$(CC) -o bigex bigex.c -L. -std=c11 -ltreemap -g -Wall -pedantic	
-	$(CC) -o strex strex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 
-	$(CC) -o ovex ovex.c -L. -std=c11 -ltreemap -g -Wall -pedantic 
-	rm *.o
+	$(CC) -o ex ex.o -L. -std=c11 -ltreemap -g 
+	$(CC) -o bigex bigex.o -L. -std=c11 -ltreemap -g
+	$(CC) -o strex strex.o -L. -std=c11 -ltreemap -g
+	$(CC) -o ovex ovex.o -L. -std=c11 -ltreemap -g
+	rm $(OBJS)
 
 %.o: %.c
 	$(CC) -c $< -o $@ -std=c11 -g -Wall -pedantic $(FLAGS)

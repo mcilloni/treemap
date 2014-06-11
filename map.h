@@ -5,6 +5,10 @@
 
 #include <stddef.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 typedef struct {
   Node *root;
   size_t size;
@@ -32,5 +36,9 @@ StringMap* strmap_new(void);
 MapIter* mapiter_start(Map *map);
 Pair* mapiter_next(MapIter *iter);
 void mapiter_free(MapIter *iter);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif

@@ -4,6 +4,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 static const bool BLACK = false, RED = true;
 
 typedef int8_t (*comparer)(const void*,const void*);
@@ -47,5 +51,9 @@ Pair* node_minpair(Node *node);
 Node* node_delete(Node *node, const void *keyV, bool *found); 
 
 void pair_free(Pair *pair);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif

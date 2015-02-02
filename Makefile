@@ -29,14 +29,14 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 all: $(OBJS)
 	$(AR) rc libtreemap.a map.o node.o iter.o
 	$(RANLIB) libtreemap.a
-	$(CC) -o ex ex.o -L. -std=c11 -ltreemap -g 
-	$(CC) -o bigex bigex.o -L. -std=c11 -ltreemap -g
-	$(CC) -o strex strex.o -L. -std=c11 -ltreemap -g
-	$(CC) -o ovex ovex.o -L. -std=c11 -ltreemap -g
+	$(CC) -o ex ex.o -L. -std=c99 -ltreemap -g 
+	$(CC) -o bigex bigex.o -L. -std=c99 -ltreemap -g
+	$(CC) -o strex strex.o -L. -std=c99 -ltreemap -g
+	$(CC) -o ovex ovex.o -L. -std=c99 -ltreemap -g
 	rm $(OBJS)
 
 %.o: %.c
-	$(CC) -c $< -o $@ -std=c11 -g -Wall -pedantic $(FLAGS)
+	$(CC) -c $< -o $@ -std=c99 -g -Wall -pedantic $(FLAGS)
 
 clean:
 	rm -f libtreemap.a
